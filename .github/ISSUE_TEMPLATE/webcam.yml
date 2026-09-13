@@ -1,0 +1,41 @@
+name: Add a webcam
+description: Suggest a public webcam for the "nearby live views" panel.
+title: "Webcam: "
+labels: [webcams]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please read the rules in [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md#adding-a-webcam)
+        first. A pull request editing `public/data/webcams.json` is even better
+        than an issue.
+  - type: input
+    id: title
+    attributes:
+      label: Place name
+    validations:
+      required: true
+  - type: input
+    id: coords
+    attributes:
+      label: Latitude, longitude
+      placeholder: "49.30, 19.94"
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: URL
+    validations:
+      required: true
+  - type: checkboxes
+    id: rules
+    attributes:
+      label: Confirmations
+      options:
+        - label: It is publicly accessible with no login, key or paywall.
+          required: true
+        - label: The operator publishes it deliberately as a public webcam.
+          required: true
+        - label: There are trees in view.
+          required: true

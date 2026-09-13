@@ -1,0 +1,33 @@
+name: Bug
+description: Something in the app is broken.
+title: "Bug: "
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, what you got instead.
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Browser and device
+      placeholder: "Firefox 130, Android 14"
+    validations:
+      required: false
+  - type: textarea
+    id: console
+    attributes:
+      label: Console errors
+      description: Anything red in the browser console.
+      render: text
+    validations:
+      required: false
+  - type: checkboxes
+    id: checked
+    attributes:
+      label: Before submitting
+      options:
+        - label: The status chips in the top-left do not already explain it (e.g. "basemap unavailable").

@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: How the forecast works
+    url: https://github.com/konradpab/fall-foliage-tracker#how-the-forecast-works
+    about: The model, its inputs, and what it is not good at.
+  - name: Known limitations and assumptions
+    url: https://github.com/konradpab/fall-foliage-tracker/blob/main/DECISIONS.md
+    about: Read this before reporting that the Mediterranean looks wrong.

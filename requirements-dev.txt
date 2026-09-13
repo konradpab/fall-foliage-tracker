@@ -1,0 +1,5 @@
+-r requirements.txt
+pytest>=8.0
+# Optional: enables NDVI sampling in the batch job and regenerating the land mask.
+Pillow>=10.0
+global-land-mask>=1.0

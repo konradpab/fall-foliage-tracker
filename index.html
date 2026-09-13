@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Fall Foliage Tracker &mdash; Europe</title>
+    <meta
+      name="description"
+      content="Where the leaves are turning across Europe, and when each region is expected to peak. Free, open source, no accounts, no cookies."
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#c2410c" />
+    <link rel="preconnect" href="https://tiles.openfreemap.org" crossorigin />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>&#127810;</text></svg>" />
+  </head>
+  <body>
+    <a class="skip" href="#panel-body">Skip to the forecast</a>
+
+    <main>
+      <div id="map" role="application" aria-label="Map of foliage conditions"></div>
+
+      <div class="overlay top-left">
+        <div class="search">
+          <input
+            id="search"
+            type="search"
+            placeholder="Search a place&hellip;"
+            aria-label="Search for a place"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <ul id="search-results" class="results" hidden></ul>
+        </div>
+        <div id="layer-chips" class="chips" role="group" aria-label="Map layer"></div>
+        <div id="date-slider-wrap" class="slider" hidden>
+          <label for="date-slider">Imagery date</label>
+          <input id="date-slider" type="range" min="0" max="29" value="29" step="1" />
+          <output id="date-label"></output>
+        </div>
+        <div id="status-chips" class="statuses" aria-live="polite"></div>
+      </div>
+    </main>
+
+    <aside id="sheet" aria-label="Forecast details">
+      <div class="handle" aria-hidden="true"></div>
+      <div id="panel-body"></div>
+      <div id="webcams"></div>
+
+      <details class="legend-wrap" open>
+        <summary>Legend</summary>
+        <ul id="legend" class="legend"></ul>
+      </details>
+
+      <footer>
+        <p>
+          Forecast data
+          <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>
+          &middot; imagery
+          <a href="https://earthdata.nasa.gov/gibs" target="_blank" rel="noopener">NASA EOSDIS GIBS</a>
+          &middot; map
+          <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>
+          contributors via
+          <a href="https://openfreemap.org/" target="_blank" rel="noopener">OpenFreeMap</a>
+          &middot; search
+          <a href="https://nominatim.org/" target="_blank" rel="noopener">Nominatim</a>
+          &middot; rendered with
+          <a href="https://maplibre.org/" target="_blank" rel="noopener">MapLibre</a>
+        </p>
+        <p class="muted">
+          No accounts, no cookies, no tracking.
+          <a href="https://github.com/konradpab/fall-foliage-tracker" target="_blank" rel="noopener">Source</a>
+          (MIT).
+        </p>
+      </footer>
+    </aside>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

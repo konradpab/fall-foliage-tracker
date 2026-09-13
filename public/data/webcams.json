@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "note": "Community-maintained list of public webcams. Add entries via pull request - see CONTRIBUTING.md. Every entry must be a publicly accessible feed with no login and no API key. kind: page | image | mjpeg | hls.",
+  "cams": []
+}

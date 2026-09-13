@@ -1,0 +1,71 @@
+name: Nightly forecast
+
+# 06:00 UTC, after the overnight Open-Meteo model runs and the MODIS NRT
+# composites have landed. Also runnable by hand from the Actions tab.
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+    inputs:
+      profile:
+        description: "Grid profile"
+        required: false
+        default: "europe"
+        type: choice
+        options: [europe, poland, dev]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nightly-forecast
+  cancel-in-progress: false
+
+jobs:
+  build-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          # Optional: enables NDVI sampling. The job runs fine without it.
+          pip install "Pillow>=10.0"
+
+      - name: Build the forecast
+        run: python -m batch.run --profile "${{ inputs.profile || 'europe' }}"
+
+      - name: Sanity-check the output
+        # A truncated or empty file must never be committed over a good one.
+        run: |
+          python - <<'PY'
+          import json, pathlib, sys
+          p = pathlib.Path("public/data/forecast.json")
+          data = json.loads(p.read_text())
+          n = len(data["cells"])
+          size = p.stat().st_size
+          print(f"{n} cells, {size/1024:.0f} kB")
+          if n < 500:
+              sys.exit(f"only {n} cells - refusing to publish")
+          if data.get("demo"):
+              sys.exit("refusing to publish demo data")
+          PY
+
+      - name: Commit if anything changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data/forecast.json public/data/grid.json
+          if git diff --staged --quiet; then
+            echo "No change."
+          else
+            git commit -m "data: nightly forecast $(date -u +%Y-%m-%d)"
+            git push
+          fi

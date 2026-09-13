@@ -1,0 +1,48 @@
+name: Wrong forecast
+description: The app said one thing and the trees said another.
+title: "Wrong forecast: "
+labels: [data, calibration]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ground truth is the scarcest input this project has, so thank you.
+        The model is a regional average and knows nothing about species mix —
+        a ±5 day miss is expected. Reports are most useful when the app is
+        clearly wrong, or wrong the same way in the same place year after year.
+  - type: input
+    id: cell
+    attributes:
+      label: Grid cell
+      description: Shown in the detail panel, e.g. 52.25,21.25
+      placeholder: "52.25,21.25"
+    validations:
+      required: true
+  - type: input
+    id: date
+    attributes:
+      label: Date you observed this
+      placeholder: "2026-10-18"
+    validations:
+      required: true
+  - type: dropdown
+    id: said
+    attributes:
+      label: What the app said
+      options: [Still green, Early colour, Near peak, Peak, Past peak, Bare]
+    validations:
+      required: true
+  - type: dropdown
+    id: saw
+    attributes:
+      label: What you actually saw
+      options: [Still green, Early colour, Near peak, Peak, Past peak, Bare]
+    validations:
+      required: true
+  - type: textarea
+    id: detail
+    attributes:
+      label: Anything else
+      description: Dominant species, elevation, valley vs ridge, a photo — all useful.
+    validations:
+      required: false
